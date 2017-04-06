@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="document")
 public class Document implements Serializable {
 	private static final long serialVersionUID = 4854137206099450092L;
 	@Id
@@ -46,5 +46,28 @@ public class Document implements Serializable {
 
 	public void setGroup(Group group) {
 		this.group = group;
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((did == null) ? 0 : did.hashCode());
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Document other = (Document) obj;
+		if (did == null) {
+			if (other.did != null)
+				return false;
+		} else if (!did.equals(other.did))
+			return false;
+		return true;
 	}
 }

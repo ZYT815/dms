@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="group")
 public class Group implements Serializable {
 
 	private static final long serialVersionUID = -6555569616016710558L;
@@ -58,5 +58,25 @@ public class Group implements Serializable {
 
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + gid;
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Group other = (Group) obj;
+		if (gid != other.gid)
+			return false;
+		return true;
 	}
 }

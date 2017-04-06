@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="person")
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -748092142509995559L;
@@ -56,6 +56,26 @@ public class Person implements Serializable {
 
 	public void setGroupPersons(List<GroupPerson> groupPersons) {
 		this.groupPersons = groupPersons;
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + pid;
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (pid != other.pid)
+			return false;
+		return true;
 	}
 
 }

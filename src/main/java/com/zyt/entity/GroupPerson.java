@@ -56,4 +56,24 @@ public class GroupPerson implements Serializable {
 	public void setPermitted(boolean permitted) {
 		this.permitted = permitted;
 	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + gpid;
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GroupPerson other = (GroupPerson) obj;
+		if (gpid != other.gpid)
+			return false;
+		return true;
+	}
 }
