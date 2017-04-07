@@ -7,14 +7,15 @@ import org.springframework.dao.support.DaoSupport;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
 public class BaseDao extends DaoSupport {
-	@Autowired
-	private HibernateTemplate hibernateTemplate;
-	
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
 
-	protected void checkDaoConfig() throws IllegalArgumentException {
-		Objects.requireNonNull(hibernateTemplate,()->"hibernateTemplate must not be null");
-	}
+    public HibernateTemplate getHibernateTemplate() {
+	return hibernateTemplate;
+    }
+
+    @Override
+    protected void checkDaoConfig() throws IllegalArgumentException {
+	Objects.requireNonNull(hibernateTemplate, () -> "hibernateTemplate must not be null");
+    }
 }

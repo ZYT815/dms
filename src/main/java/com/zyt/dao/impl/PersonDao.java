@@ -8,10 +8,11 @@ import com.zyt.exception.LoginException;
 
 @Repository
 public class PersonDao extends BaseDao implements IPersonDao {
-	public Person selectByUsername(String username) {
-		String queryString = "from Person where pname = :pname";
-		String paramName = "pname";
-		return (Person) getHibernateTemplate().findByNamedParam(queryString, paramName, username).stream().findFirst()
-		        .orElseThrow(() -> new LoginException());
-	}
+    @Override
+    public Person selectByUsername(String username) {
+	String queryString = "from Person where pname = :pname";
+	String paramName = "pname";
+	return (Person) getHibernateTemplate().findByNamedParam(queryString, paramName, username).stream().findFirst()
+		.orElseThrow(() -> new LoginException());
+    }
 }

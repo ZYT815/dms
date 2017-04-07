@@ -20,35 +20,36 @@ import com.zyt.service.IGroupService;
 @RequestMapping("/group")
 @SessionAttributes(Const.Attr.LOGIN_USER)
 public class GroupController {
-	
-	@Autowired
-	private IGroupService groupService;
-	
-	@RequestMapping("/create")
-	public String create(){
-		return "/group/create";
-	}
-	
-	@RequestMapping("/doCreate")
-	public String doCreate(String gname,@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson){
-		Group group=new Group();
-		group.setGname(gname);
 
-		GroupPerson groupPerson=new GroupPerson();
-		groupPerson.setPermitted(true);
-		groupPerson.setGroup(group);
-		groupPerson.setPerson(loginPerson);
-		
-		if(CollectionUtils.isEmpty(loginPerson.getGroupPersons()))
-			loginPerson.setGroupPersons(Stream.of(groupPerson).collect(Collectors.toList()));
-		else
-			loginPerson.getGroupPersons().add(groupPerson);
-		
-		group.setGroupPersons(loginPerson.getGroupPersons());
-		
-		groupService.save(group);
-		
-		return "index/index";
+    @Autowired
+    private IGroupService groupService;
+
+    @RequestMapping("/create")
+    public String create() {
+	return "/group/create";
+    }
+
+    @RequestMapping("/doCreate")
+    public String doCreate(String gname, @ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson) {
+	Group group = new Group();
+	group.setGname(gname);
+
+	GroupPerson groupPerson = new GroupPerson();
+	groupPerson.setPermitted(true);
+	groupPerson.setGroup(group);
+	groupPerson.setPerson(loginPerson);
+
+	if (CollectionUtils.isEmpty(loginPerson.getGroupPersons())) {
+	    loginPerson.setGroupPersons(Stream.of(groupPerson).collect(Collectors.toList()));
+	} else {
+	    loginPerson.getGroupPersons().add(groupPerson);
 	}
-	
+
+	group.setGroupPersons(loginPerson.getGroupPersons());
+
+	groupService.save(group);
+
+	return "index/index";
+    }
+
 }
