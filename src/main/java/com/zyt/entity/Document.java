@@ -2,27 +2,43 @@ package com.zyt.entity;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
-@Table(name="document")
+@Table(name = "document")
 public class Document implements Serializable {
 	private static final long serialVersionUID = 4854137206099450092L;
 	@Id
-	@Column(name="did")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "did")
+	@GeneratedValue(generator="did")
+	@GenericGenerator(name="did",strategy="uuid")
 	private String did;
-	@Column(name="ddata")
+	@Column(name = "ddata")
 	private Blob ddata;
-	@OneToOne(targetEntity=Group.class)
+	@ManyToOne(targetEntity = Group.class,cascade=CascadeType.ALL)
+	@JoinColumn(name="gid")
 	private Group group;
+	@Column(name = "updateDate")
+	private Date updateDate;
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
 
 	public String getDid() {
 		return did;

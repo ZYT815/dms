@@ -3,27 +3,30 @@ package com.zyt.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="person")
+@Table(name = "person")
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -748092142509995559L;
 	@Id
 	@Column(name = "pid")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pid;
 	@Column(name = "pname")
 	private String pname;
 	@Column(name = "ppass")
 	private String ppass;
-	@OneToMany(targetEntity = GroupPerson.class)
+	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="person")
 	private List<GroupPerson> groupPersons;
 
 	public int getPid() {

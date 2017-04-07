@@ -2,12 +2,14 @@ package com.zyt.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,11 +18,13 @@ public class GroupPerson implements Serializable {
 	private static final long serialVersionUID = 9187554354928135579L;
 	@Id
 	@Column(name = "gpid")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int gpid;
-	@OneToOne(targetEntity = Person.class)
+	@ManyToOne(targetEntity = Person.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "pid")
 	private Person person;
-	@OneToOne(targetEntity = Group.class)
+	@ManyToOne(targetEntity = Group.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "gid")
 	private Group group;
 	@Column(name = "permitted")
 	private boolean permitted;

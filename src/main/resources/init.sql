@@ -27,6 +27,7 @@ CREATE TABLE docment(
 	ddata LONGBLOB NOT NULL,
 	dname VARCHAR(255) NOT NULL,
 	gid INT NOT NULL,
+	updatedate DATETIME,
 	CONSTRAINT fk_group_document FOREIGN KEY(gid) REFERENCES `group`(gid)
 );
 
