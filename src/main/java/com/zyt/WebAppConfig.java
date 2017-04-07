@@ -24,6 +24,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	ThymeleafViewResolver resolver = new ThymeleafViewResolver();
 	resolver.setTemplateEngine(templateEngine);
 	resolver.setCharacterEncoding(Const.Coding.UTF8);
+	resolver.setCache(false);
 	return resolver;
     }
 
@@ -41,6 +42,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	templateResolver.setSuffix(".html");
 	templateResolver.setTemplateMode("HTML5");
 	templateResolver.setCharacterEncoding(Const.Coding.UTF8);
+	templateResolver.setCacheable(false);
 	return templateResolver;
     }
 

@@ -26,6 +26,8 @@ public class Document implements Serializable {
     private String did;
     @Column(name = "ddata")
     private Blob ddata;
+    @Column(name="dname")
+    private String dname;
     @ManyToOne(targetEntity = Group.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "gid")
     private Group group;
@@ -92,5 +94,13 @@ public class Document implements Serializable {
 	    return false;
 	}
 	return true;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
     }
 }

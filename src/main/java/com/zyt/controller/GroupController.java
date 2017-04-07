@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.zyt.Const;
@@ -26,10 +27,10 @@ public class GroupController {
 
     @RequestMapping("/create")
     public String create() {
-	return "/group/create";
+	return "group/create";
     }
 
-    @RequestMapping("/doCreate")
+    @RequestMapping(value="/doCreate",method=RequestMethod.POST)
     public String doCreate(String gname, @ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson) {
 	Group group = new Group();
 	group.setGname(gname);
@@ -44,12 +45,15 @@ public class GroupController {
 	} else {
 	    loginPerson.getGroupPersons().add(groupPerson);
 	}
-
 	group.setGroupPersons(loginPerson.getGroupPersons());
 
 	groupService.save(group);
+	return "index";
+    }
 
-	return "index/index";
+    @RequestMapping("/index")
+    public String index(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson){
+	return "group/index";
     }
 
 }

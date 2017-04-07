@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml/"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>文档管理系统-组织文档</title>
+</head>
+<body>
+	<div th:if="${permitted}">
+		<a th:href="@{'/document/add/'+${gpid}}">上传文档</a>
+	</div>
+	<div th:each="document:${doucments}">
+		<a th:href="#" th:text="${document:.gname}"></a><span th:if="${permitted}">删除</span>
+	</div>
+</body>
+</html>

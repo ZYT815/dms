@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml/"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>文档管理系统-添加文档</title>
+</head>
+<body>
+	<form th:action="@{/document/doAdd}" th:method="post" enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<input type="hidden" name="gpid"  th:value="${gpid}"/>
+		<button>ok</button>
+	</form>
+</body>
+</html>

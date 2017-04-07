@@ -8,6 +8,9 @@ public interface Const {
 	}
 
 	String LOGIN_USER = "login_user";
+	String DOUCMENTS = "documents";
+	String PERMITTED = "permitted";
+	String GPID = "gpid";
     }
 
     interface PackageName {

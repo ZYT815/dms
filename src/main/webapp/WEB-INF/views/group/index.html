@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml/"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>文档管理系统-我的组织</title>
+</head>
+<body>
+	<div th:each="groupPerson:${session.login_user.groupPersons}">
+		<a th:href="@{'/document/index/'+${groupPerson.gpid}}" th:text="${groupPerson.group.gname}"></a> <span th:if="${groupPerson.permitted}">❤</span>
+	</div>
+</body>
+</html>
