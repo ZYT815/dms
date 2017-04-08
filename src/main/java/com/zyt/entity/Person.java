@@ -1,7 +1,7 @@
 package com.zyt.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,8 +26,8 @@ public class Person implements Serializable {
 	private String pname;
 	@Column(name = "ppass")
 	private String ppass;
-	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "person")
-	private List<GroupPerson> groupPersons;
+	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, mappedBy = "person", fetch = FetchType.EAGER)
+	private Set<GroupPerson> groupPersons;
 
 	public int getPid() {
 		return pid;
@@ -53,11 +53,11 @@ public class Person implements Serializable {
 		this.ppass = ppass;
 	}
 
-	public List<GroupPerson> getGroupPersons() {
+	public Set<GroupPerson> getGroupPersons() {
 		return groupPersons;
 	}
 
-	public void setGroupPersons(List<GroupPerson> groupPersons) {
+	public void setGroupPersons(Set<GroupPerson> groupPersons) {
 		this.groupPersons = groupPersons;
 	}
 

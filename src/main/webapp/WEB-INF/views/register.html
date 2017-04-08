@@ -3,14 +3,13 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>文档管理系统-登录</title>
+<title>文档管理系统-注册</title>
 </head>
 <body>
-	<form th:action="@{/login/doLogin}" th:method="post">
+	<form th:action="@{/doRegister}" th:method="post">
 		username:<input name="username" type="text" th:value="${username}" /><br />
 		password:<input name="password" type="password" th:value="${password}" /><br />
-		<button>login</button>
+		<button>register</button>
 	</form>
-	没有帐号?<a th:href="@{/register/}">点击注册</a>
 </body>
 </html>

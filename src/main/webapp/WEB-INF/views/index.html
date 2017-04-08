@@ -6,6 +6,7 @@
 <title>文档管理系统</title>
 </head>
 <body>
+	当前用户 <span th:text="${session.login_user.pname}"></span>
 	<a th:href="@{/group/create}">创建组织</a>
 	<a th:href="@{/group/index}">我的组织</a>
 </body>

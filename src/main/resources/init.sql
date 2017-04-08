@@ -22,7 +22,7 @@ CREATE TABLE group_person(
 	CONSTRAINT fk_group_gp FOREIGN KEY(gid) REFERENCES `group`(gid)
 );
 
-CREATE TABLE docment(
+CREATE TABLE document(
 	did CHAR(32) PRIMARY KEY,
 	ddata LONGBLOB NOT NULL,
 	dname VARCHAR(255) NOT NULL,

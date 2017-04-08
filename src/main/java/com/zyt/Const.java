@@ -31,8 +31,6 @@ public interface Const {
 		}
 	}
 
-	interface Coding {
-		String UTF8 = "utf-8";
-	}
-
+	String REDIRECT = "redirect:";
+	String FORWORD="forward:";
 }

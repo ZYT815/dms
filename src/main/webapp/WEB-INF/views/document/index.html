@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml/"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml/" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>文档管理系统-组织文档</title>
@@ -9,8 +8,9 @@
 	<div th:if="${permitted}">
 		<a th:href="@{'/document/add/'+${gpid}}">上传文档</a>
 	</div>
-	<div th:each="document:${doucments}">
-		<a th:href="#" th:text="${document:.gname}"></a><span th:if="${permitted}">删除</span>
+	<div th:each="document:${documents}">
+		<a th:href="@{'/document/download/'+${document.did}}" th:text="${document.dname}"></a>
+		<a th:href="@{'/document/delete/'+${document.did}}"><span th:if="${permitted}">删除</span></a>
 	</div>
 </body>
 </html>

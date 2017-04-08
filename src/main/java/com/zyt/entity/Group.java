@@ -1,11 +1,12 @@
 package com.zyt.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,16 +25,16 @@ public class Group implements Serializable {
 	private int gid;
 	@Column(name = "gname")
 	private String gname;
-	@OneToMany(targetEntity = Document.class, cascade = CascadeType.ALL, mappedBy = "group")
-	private List<Document> documents;
-	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, mappedBy = "group")
-	private List<GroupPerson> groupPersons;
+	@OneToMany(targetEntity = Document.class, cascade = CascadeType.ALL, mappedBy = "group",fetch=FetchType.EAGER)
+	private Set<Document> documents;
+	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, mappedBy = "group",fetch=FetchType.EAGER)
+	private Set<GroupPerson> groupPersons;
 
-	public List<GroupPerson> getGroupPersons() {
+	public Set<GroupPerson> getGroupPersons() {
 		return groupPersons;
 	}
 
-	public void setGroupPersons(List<GroupPerson> groupPersons) {
+	public void setGroupPersons(Set<GroupPerson> groupPersons) {
 		this.groupPersons = groupPersons;
 	}
 
@@ -53,11 +54,11 @@ public class Group implements Serializable {
 		this.gname = gname;
 	}
 
-	public List<Document> getDocuments() {
+	public Set<Document> getDocuments() {
 		return documents;
 	}
 
-	public void setDocuments(List<Document> documents) {
+	public void setDocuments(Set<Document> documents) {
 		this.documents = documents;
 	}
 

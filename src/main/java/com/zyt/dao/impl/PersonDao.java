@@ -15,4 +15,9 @@ public class PersonDao extends BaseDao implements IPersonDao {
 		return (Person) getHibernateTemplate().findByNamedParam(queryString, paramName, username).stream().findFirst()
 				.orElseThrow(() -> new LoginException());
 	}
+
+	@Override
+	public void save(Person person) {
+		getHibernateTemplate().save(person);
+	}
 }

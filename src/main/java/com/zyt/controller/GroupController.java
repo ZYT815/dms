@@ -1,5 +1,7 @@
 package com.zyt.controller;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,9 +43,11 @@ public class GroupController {
 		groupPerson.setPerson(loginPerson);
 
 		if (CollectionUtils.isEmpty(loginPerson.getGroupPersons())) {
-			loginPerson.setGroupPersons(Stream.of(groupPerson).collect(Collectors.toList()));
+			loginPerson.setGroupPersons(Stream.of(groupPerson).collect(Collectors.toSet()));
 		} else {
-			loginPerson.getGroupPersons().add(groupPerson);
+			Set<GroupPerson>groupPersons= new HashSet<>(loginPerson.getGroupPersons());
+			groupPersons.add(groupPerson);
+			loginPerson.setGroupPersons(groupPersons);
 		}
 		group.setGroupPersons(loginPerson.getGroupPersons());
 

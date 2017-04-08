@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +27,7 @@ public class Document implements Serializable {
 	private Blob ddata;
 	@Column(name = "dname")
 	private String dname;
-	@ManyToOne(targetEntity = Group.class, cascade = CascadeType.ALL)
+	@ManyToOne(targetEntity = Group.class)
 	@JoinColumn(name = "gid")
 	private Group group;
 	@Column(name = "updateDate")

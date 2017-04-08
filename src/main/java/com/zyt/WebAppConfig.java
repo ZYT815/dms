@@ -1,5 +1,7 @@
 package com.zyt;
 
+import java.nio.charset.StandardCharsets;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.context.annotation.Bean;
@@ -24,7 +26,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	public ViewResolver viewResolver(TemplateEngine templateEngine) {
 		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
 		resolver.setTemplateEngine(templateEngine);
-		resolver.setCharacterEncoding(Const.Coding.UTF8);
+		resolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		resolver.setCache(false);
 		return resolver;
 	}
@@ -42,7 +44,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		templateResolver.setPrefix("/WEB-INF/views/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML5");
-		templateResolver.setCharacterEncoding(Const.Coding.UTF8);
+		templateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
 		templateResolver.setCacheable(false);
 		return templateResolver;
 	}
@@ -52,7 +54,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		return resolver;
 	}
-
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
