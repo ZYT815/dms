@@ -27,44 +27,48 @@ import com.alibaba.druid.pool.DruidDataSource;
 @ImportResource("classpath:applicationContext.xml")
 public class AppConfig {
 
-    @Autowired
-    private Environment environment;
+	@Autowired
+	private Environment environment;
 
-    @Bean
-    public DataSource dataSource() throws SQLException {
-	DruidDataSource dataSource = new DruidDataSource();
-	dataSource.setUsername(environment.getProperty(Const.Props.JDBC.USERNAME));
-	dataSource.setPassword(environment.getProperty(Const.Props.JDBC.PASS));
-	dataSource.setUrl(environment.getProperty(Const.Props.JDBC.URL));
-	dataSource.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
-	dataSource.setFilters(Const.Druid.STAT);
-	return dataSource;
-    }
+	//数据源
+	@Bean
+	public DataSource dataSource() throws SQLException {
+		DruidDataSource dataSource = new DruidDataSource();
+		dataSource.setUsername(environment.getProperty(Const.Props.JDBC.USERNAME));
+		dataSource.setPassword(environment.getProperty(Const.Props.JDBC.PASS));
+		dataSource.setUrl(environment.getProperty(Const.Props.JDBC.URL));
+		dataSource.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
+		dataSource.setFilters(Const.Druid.STAT);
+		return dataSource;
+	}
 
-    @Bean
-    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
-	HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
-	hibernateTransactionManager.setSessionFactory(sessionFactory);
-	return hibernateTransactionManager;
-    }
+	//hibernate事务管理器
+	@Bean
+	public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
+		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+		hibernateTransactionManager.setSessionFactory(sessionFactory);
+		return hibernateTransactionManager;
+	}
 
-    @Bean
-    public SessionFactory sessionFactory(DataSource dataSource) throws IOException {
-	Properties props = new Properties();
-	props.setProperty(Const.Props.DIALECT, org.hibernate.dialect.MySQLDialect.class.getName());
+	//hiberntae sessionFactory
+	@Bean
+	public SessionFactory sessionFactory(DataSource dataSource) throws IOException {
+		Properties props = new Properties();
+		props.setProperty(Const.Props.DIALECT, org.hibernate.dialect.MySQLDialect.class.getName());
 
-	LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-	localSessionFactoryBean.setDataSource(dataSource);
-	localSessionFactoryBean.setPackagesToScan(Const.PackageName.ENTITY);
-	localSessionFactoryBean.setHibernateProperties(props);
-	localSessionFactoryBean.afterPropertiesSet();
+		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
+		localSessionFactoryBean.setDataSource(dataSource);
+		localSessionFactoryBean.setPackagesToScan(Const.PackageName.ENTITY);
+		localSessionFactoryBean.setHibernateProperties(props);
+		localSessionFactoryBean.afterPropertiesSet();
 
-	return localSessionFactoryBean.getObject();
-    }
+		return localSessionFactoryBean.getObject();
+	}
 
-    @Bean
-    public HibernateTemplate hibernateTemplate(SessionFactory sessionFactory) {
-	return new HibernateTemplate(sessionFactory);
-    }
+	//hibernate template
+	@Bean
+	public HibernateTemplate hibernateTemplate(SessionFactory sessionFactory) {
+		return new HibernateTemplate(sessionFactory);
+	}
 
 }

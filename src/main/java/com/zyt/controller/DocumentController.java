@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,27 +22,30 @@ import com.zyt.entity.Person;
 @SessionAttributes(Const.Attr.LOGIN_USER)
 public class DocumentController {
 
-    @RequestMapping("/index/{gpid}")
-    public String index(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson,int gpid,Model model){
-	GroupPerson groupPerson = loginPerson.getGroupPersons().stream().filter(gp->gp.getGpid()==gpid).findFirst().get();
-	List<Document> documents = groupPerson.getGroup().getDocuments();
-	boolean permitted = groupPerson.isPermitted();
-	model.addAttribute(Const.Attr.DOUCMENTS, documents);
-	model.addAttribute(Const.Attr.PERMITTED, permitted);
-	model.addAttribute(Const.Attr.GPID, groupPerson.getGpid());
-	return "document/index";
-    }
-    
-    @RequestMapping("/add/{gpid}")
-    public String add(int gpid,Model model){
-	model.addAttribute(Const.Attr.GPID, gpid);
-	return "document/add";
-    }
- 
-    @RequestMapping(value="/doAdd",method=RequestMethod.POST)
-    public String doAdd(@RequestParam("file") CommonsMultipartFile file,@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson,int gpid,Model model){
-	System.out.println(file);
-	return index(loginPerson, gpid, model);
-    }
-    
+	@RequestMapping("/index/{gpid}")
+	public String index(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, @PathVariable("gpid") int gpid,
+			Model model) {
+		GroupPerson groupPerson = loginPerson.getGroupPersons().stream().filter(gp -> gp.getGpid() == gpid).findFirst()
+				.get();
+		List<Document> documents = groupPerson.getGroup().getDocuments();
+		boolean permitted = groupPerson.isPermitted();
+		model.addAttribute(Const.Attr.DOUCMENTS, documents);
+		model.addAttribute(Const.Attr.PERMITTED, permitted);
+		model.addAttribute(Const.Attr.GPID, groupPerson.getGpid());
+		return "document/index";
+	}
+
+	@RequestMapping("/add/{gpid}")
+	public String add(@PathVariable("gpid") int gpid, Model model) {
+		model.addAttribute(Const.Attr.GPID, gpid);
+		return "document/add";
+	}
+
+	@RequestMapping(value = "/doAdd", method = RequestMethod.POST)
+	public String doAdd(@RequestParam(value = "file", required = false) CommonsMultipartFile file,
+			@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson,
+			@RequestParam(value = "gpid", required = false) int gpid, Model model) {
+		return index(loginPerson, gpid, model);
+	}
+
 }

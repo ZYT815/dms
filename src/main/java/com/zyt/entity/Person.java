@@ -17,74 +17,74 @@ import javax.persistence.Table;
 @Table(name = "person")
 public class Person implements Serializable {
 
-    private static final long serialVersionUID = -748092142509995559L;
-    @Id
-    @Column(name = "pid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pid;
-    @Column(name = "pname")
-    private String pname;
-    @Column(name = "ppass")
-    private String ppass;
-    @OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "person")
-    private List<GroupPerson> groupPersons;
+	private static final long serialVersionUID = -748092142509995559L;
+	@Id
+	@Column(name = "pid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int pid;
+	@Column(name = "pname")
+	private String pname;
+	@Column(name = "ppass")
+	private String ppass;
+	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "person")
+	private List<GroupPerson> groupPersons;
 
-    public int getPid() {
-	return pid;
-    }
-
-    public void setPid(int pid) {
-	this.pid = pid;
-    }
-
-    public String getPname() {
-	return pname;
-    }
-
-    public void setPname(String pname) {
-	this.pname = pname;
-    }
-
-    public String getPpass() {
-	return ppass;
-    }
-
-    public void setPpass(String ppass) {
-	this.ppass = ppass;
-    }
-
-    public List<GroupPerson> getGroupPersons() {
-	return groupPersons;
-    }
-
-    public void setGroupPersons(List<GroupPerson> groupPersons) {
-	this.groupPersons = groupPersons;
-    }
-
-    @Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + pid;
-	return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj) {
-	    return true;
+	public int getPid() {
+		return pid;
 	}
-	if (obj == null) {
-	    return false;
+
+	public void setPid(int pid) {
+		this.pid = pid;
 	}
-	if (getClass() != obj.getClass()) {
-	    return false;
+
+	public String getPname() {
+		return pname;
 	}
-	Person other = (Person) obj;
-	if (pid != other.pid) {
-	    return false;
+
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
-	return true;
-    }
+
+	public String getPpass() {
+		return ppass;
+	}
+
+	public void setPpass(String ppass) {
+		this.ppass = ppass;
+	}
+
+	public List<GroupPerson> getGroupPersons() {
+		return groupPersons;
+	}
+
+	public void setGroupPersons(List<GroupPerson> groupPersons) {
+		this.groupPersons = groupPersons;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + pid;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Person other = (Person) obj;
+		if (pid != other.pid) {
+			return false;
+		}
+		return true;
+	}
 
 }

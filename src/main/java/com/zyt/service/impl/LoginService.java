@@ -11,15 +11,15 @@ import com.zyt.service.ILoginService;
 @Service
 public class LoginService implements ILoginService {
 
-    @Autowired
-    private PersonDao personDao;
+	@Autowired
+	private PersonDao personDao;
 
-    @Override
-    public Person login(String username, String password) {
-	Person loginPerson = personDao.selectByUsername(username);
-	if (!loginPerson.getPpass().equals(password)) {
-	    throw new LoginException();
+	@Override
+	public Person login(String username, String password) {
+		Person loginPerson = personDao.selectByUsername(username);
+		if (!loginPerson.getPpass().equals(password)) {
+			throw new LoginException();
+		}
+		return loginPerson;
 	}
-	return loginPerson;
-    }
 }

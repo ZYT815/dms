@@ -16,74 +16,74 @@ import javax.persistence.Table;
 @Table(name = "t_group")
 public class Group implements Serializable {
 
-    private static final long serialVersionUID = -6555569616016710558L;
+	private static final long serialVersionUID = -6555569616016710558L;
 
-    @Id
-    @Column(name = "gid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int gid;
-    @Column(name = "gname")
-    private String gname;
-    @OneToMany(targetEntity = Document.class, cascade = CascadeType.ALL, mappedBy = "group")
-    private List<Document> documents;
-    @OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, mappedBy = "group")
-    private List<GroupPerson> groupPersons;
+	@Id
+	@Column(name = "gid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int gid;
+	@Column(name = "gname")
+	private String gname;
+	@OneToMany(targetEntity = Document.class, cascade = CascadeType.ALL, mappedBy = "group")
+	private List<Document> documents;
+	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, mappedBy = "group")
+	private List<GroupPerson> groupPersons;
 
-    public List<GroupPerson> getGroupPersons() {
-	return groupPersons;
-    }
-
-    public void setGroupPersons(List<GroupPerson> groupPersons) {
-	this.groupPersons = groupPersons;
-    }
-
-    public int getGid() {
-	return gid;
-    }
-
-    public void setGid(int gid) {
-	this.gid = gid;
-    }
-
-    public String getGname() {
-	return gname;
-    }
-
-    public void setGname(String gname) {
-	this.gname = gname;
-    }
-
-    public List<Document> getDocuments() {
-	return documents;
-    }
-
-    public void setDocuments(List<Document> documents) {
-	this.documents = documents;
-    }
-
-    @Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + gid;
-	return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj) {
-	    return true;
+	public List<GroupPerson> getGroupPersons() {
+		return groupPersons;
 	}
-	if (obj == null) {
-	    return false;
+
+	public void setGroupPersons(List<GroupPerson> groupPersons) {
+		this.groupPersons = groupPersons;
 	}
-	if (getClass() != obj.getClass()) {
-	    return false;
+
+	public int getGid() {
+		return gid;
 	}
-	Group other = (Group) obj;
-	if (gid != other.gid) {
-	    return false;
+
+	public void setGid(int gid) {
+		this.gid = gid;
 	}
-	return true;
-    }
+
+	public String getGname() {
+		return gname;
+	}
+
+	public void setGname(String gname) {
+		this.gname = gname;
+	}
+
+	public List<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + gid;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Group other = (Group) obj;
+		if (gid != other.gid) {
+			return false;
+		}
+		return true;
+	}
 }

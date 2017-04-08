@@ -10,11 +10,11 @@ import com.zyt.service.IGroupService;
 @Service
 public class GroupService implements IGroupService {
 
-    @Autowired
-    private IGroupDao groupDao;
+	@Autowired
+	private IGroupDao groupDao;
 
-    @Override
-    public void save(Group group) {
-	groupDao.save(group);
-    }
+	@Override
+	public void save(Group group) {
+		groupDao.save(group);
+	}
 }

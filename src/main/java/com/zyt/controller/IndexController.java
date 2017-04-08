@@ -12,11 +12,11 @@ import com.zyt.Const;
 @Controller
 @SessionAttributes(Const.Attr.LOGIN_USER)
 public class IndexController {
-    @RequestMapping("/")
-    public String index(ModelMap modelMap) {
-	if(Objects.isNull(modelMap.get(Const.Attr.LOGIN_USER)))
-	    return "login";
-	else
-	    return "index";
-    }
+	@RequestMapping("/")
+	public String index(ModelMap modelMap) {
+		if (Objects.isNull(modelMap.get(Const.Attr.LOGIN_USER)))
+			return "login";
+		else
+			return "index";
+	}
 }
