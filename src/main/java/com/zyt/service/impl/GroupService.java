@@ -17,4 +17,15 @@ public class GroupService implements IGroupService {
 	public void save(Group group) {
 		groupDao.save(group);
 	}
+
+	@Override
+	public void delete(Group group) {
+		groupDao.delete(group);
+	}
+
+	@Override
+	public Group selectByShareId(String shareId) {
+		return groupDao.selectByShareId(shareId);
+	}
+
 }

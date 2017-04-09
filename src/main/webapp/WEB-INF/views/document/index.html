@@ -5,11 +5,10 @@
 <title>文档管理系统-组织文档</title>
 </head>
 <body>
-	<div th:if="${permitted}">
-		<a th:href="@{'/document/add/'+${gpid}}">上传文档</a>
-	</div>
+	<a th:href="@{'/'}" th:text="首页"></a>
 	<div th:each="document:${documents}">
-		<a th:href="@{'/document/download/'+${document.did}}" th:text="${document.dname}"></a>
+		<hr/>
+		<a th:href="@{'/document/download/'+${document.did}}" th:text="${document.dname}"></a><br/>
 		<a th:href="@{'/document/delete/'+${document.did}}"><span th:if="${permitted}">删除</span></a>
 	</div>
 </body>

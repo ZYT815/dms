@@ -6,8 +6,18 @@
 <title>文档管理系统-我的组织</title>
 </head>
 <body>
-	<div th:each="groupPerson:${session.login_user.groupPersons}">
-		<a th:href="@{'/document/index/'+${groupPerson.gpid}}" th:text="${groupPerson.group.gname}"></a> <span th:if="${groupPerson.permitted}">❤</span>
+	<div th:each="groupPerson,i:${session.login_user.groupPersons}">
+		<hr th:if="${i.first}" />
+		组织名:<span th:text="${groupPerson.group.gname}"></span><br/>
+		<span th:if="${groupPerson.permitted}">
+			你是管理员<br/>
+			组织唯一编码:<span th:text="${groupPerson.group.shareId}"></span><br/>
+		<a th:href="@{'/document/add/'+${groupPerson.gpid}}">上传文档</a>
+		</span>
+		<a th:href="@{'/document/index/'+${groupPerson.gpid}}" th:text="查看文档"></a> <br/>
+		<a th:href="@{'/group/exit/'+${groupPerson.gpid}}" >退出该组织</a><br/>
+		<hr/>
 	</div>
+	<a th:href="@{'/'}">首页</a>
 </body>
 </html>

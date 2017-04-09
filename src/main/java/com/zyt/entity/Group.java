@@ -23,11 +23,13 @@ public class Group implements Serializable {
 	@Column(name = "gid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int gid;
+	@Column(name = "shareId")
+	private String shareId;
 	@Column(name = "gname")
 	private String gname;
-	@OneToMany(targetEntity = Document.class, cascade = CascadeType.ALL, mappedBy = "group",fetch=FetchType.EAGER)
+	@OneToMany(targetEntity = Document.class, cascade = CascadeType.ALL, mappedBy = "group", fetch = FetchType.EAGER)
 	private Set<Document> documents;
-	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, mappedBy = "group",fetch=FetchType.EAGER)
+	@OneToMany(targetEntity = GroupPerson.class, cascade = CascadeType.ALL, mappedBy = "group", fetch = FetchType.EAGER)
 	private Set<GroupPerson> groupPersons;
 
 	public Set<GroupPerson> getGroupPersons() {
@@ -86,5 +88,13 @@ public class Group implements Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	public String getShareId() {
+		return shareId;
+	}
+
+	public void setShareId(String shareId) {
+		this.shareId = shareId;
 	}
 }

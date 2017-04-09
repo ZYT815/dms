@@ -59,47 +59,45 @@ public class DocumentController {
 		Document document = documentService.selectById(did);
 		Set<GroupPerson> groupPersons = document.getGroup().getGroupPersons();
 		groupPersons.retainAll(loginPerson.getGroupPersons());
-		int gpid = groupPersons.stream().findFirst().get().getGpid();
+		String gpid = groupPersons.stream().findFirst().get().getGpid();
 		
 		documentService.delete(document);
-		return Const.REDIRECT+String.format("/document/index/%d",gpid);
+		return Const.REDIRECT+String.format("/document/index/%s",gpid);
 	}
 	
 	@RequestMapping("/index/{gpid}")
-	public String index(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, @PathVariable int gpid,
+	public String index(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, @PathVariable String gpid,
 			Model model) {
+		//更新用户相关的文档内容,现在重新查询用户并覆盖session中用户
 		loginPerson=personService.selectByName(loginPerson.getPname());
 		model.addAttribute(Const.Attr.LOGIN_USER, loginPerson);
 		
-		GroupPerson groupPerson = loginPerson.getGroupPersons().stream().filter(gp -> gp.getGpid() == gpid).findFirst()
+		GroupPerson groupPerson = loginPerson.getGroupPersons().stream().filter(gp -> gp.getGpid().equals(gpid)).findFirst()
 				.get();
 		Set<Document> documents = groupPerson.getGroup().getDocuments();
-		boolean permitted = groupPerson.isPermitted();
 		model.addAttribute(Const.Attr.DOUCMENTS, documents);
-		model.addAttribute(Const.Attr.PERMITTED, permitted);
-		model.addAttribute(Const.Attr.GPID, groupPerson.getGpid());
+		model.addAttribute(Const.Attr.PERMITTED,groupPerson.isPermitted());
 		return "document/index";
 	}
 
 	@RequestMapping("/add/{gpid}")
-	public String add(@PathVariable int gpid, Model model) {
+	public String add(@PathVariable String gpid, Model model) {
 		model.addAttribute(Const.Attr.GPID, gpid);
 		return "document/add";
 	}
 
 	@RequestMapping(value = "/doAdd", method = RequestMethod.POST)
-	public String doAdd(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, MultipartFile file, int gpid) throws IOException {
-		byte[] bytes;
-		bytes = file.getBytes();
+	public String doAdd(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, MultipartFile file, String gpid) throws IOException {
+		byte[] bytes= file.getBytes();
 		Document document = new Document();
 		document.setDdata(blobBuilder.builderBlob(bytes));
 		document.setDname(file.getOriginalFilename());
 		document.setGroup(
-				loginPerson.getGroupPersons().stream().filter(gp -> gp.getGpid() == gpid).findFirst().get().getGroup());
+				loginPerson.getGroupPersons().stream().filter(gp -> gp.getGpid().equals(gpid)).findFirst().get().getGroup());
 		document.setUpdateDate(Calendar.getInstance().getTime());
 		documentService.save(document);
 		
-		return Const.REDIRECT+String.format("/document/index/%d", gpid);
+		return Const.REDIRECT+String.format("/document/index/%s", gpid);
 	}
 
 }
