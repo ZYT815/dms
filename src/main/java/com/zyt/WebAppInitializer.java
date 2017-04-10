@@ -3,8 +3,8 @@ package com.zyt;
 import java.nio.charset.StandardCharsets;
 import java.util.EnumSet;
 
-import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -12,7 +12,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-	
+
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		Dynamic charencodingFilter = servletContext.addFilter("charencodingFilter", CharacterEncodingFilter.class);
@@ -21,7 +21,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 		charencodingFilter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, "/*");
 		super.onStartup(servletContext);
 	}
-	
+
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class<?>[] { AppConfig.class };

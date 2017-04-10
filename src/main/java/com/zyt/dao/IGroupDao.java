@@ -9,4 +9,6 @@ public interface IGroupDao {
 
 	Group selectByShareId(String shareId);
 
+	Group get(int gid);
+
 }

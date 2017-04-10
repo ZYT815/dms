@@ -69,21 +69,22 @@ public class GroupController {
 
 	@RequestMapping("/exit/{gpid}")
 	public String exit(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, @PathVariable String gpid) {
-		GroupPerson groupPerson = loginPerson.getGroupPersons().stream().filter(gp -> gp.getGpid().equals(gpid)).findFirst()
-				.get();
+		GroupPerson groupPerson = loginPerson.getGroupPersons().stream().filter(gp -> gp.getGpid().equals(gpid))
+				.findFirst().get();
 		groupPersonService.delete(groupPerson);
-		loginPerson.setGroupPersons(loginPerson.getGroupPersons().stream().filter(gp->!gp.equals(groupPerson)).collect(Collectors.toSet()));
+		loginPerson.setGroupPersons(loginPerson.getGroupPersons().stream().filter(gp -> !gp.equals(groupPerson))
+				.collect(Collectors.toSet()));
 		return "group/index";
 	}
-	
+
 	@RequestMapping("/join")
-	public String join(){
+	public String join() {
 		return "group/join";
 	}
-	
+
 	@RequestMapping("/doJoin")
-	public String doJoin(@ModelAttribute(Const.Attr.LOGIN_USER)Person loginUser,String shareId){
-		groupPersonService.join(loginUser,shareId);
+	public String doJoin(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginUser, String shareId) {
+		groupPersonService.join(loginUser, shareId);
 		return "group/index";
 	}
 

@@ -13,12 +13,12 @@ public class RegisterService implements IRegisterService {
 
 	@Autowired
 	private IPersonDao personDao;
-	
+
+	@Override
 	public void register(Person person) {
-		try{
+		try {
 			personDao.save(person);
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			throw new RegisterException();
 		}
 	}

@@ -13,6 +13,7 @@
 			你是管理员<br/>
 			组织唯一编码:<span th:text="${groupPerson.group.shareId}"></span><br/>
 		<a th:href="@{'/document/add/'+${groupPerson.gpid}}">上传文档</a>
+		<a th:href="@{'/groupPerson/index/'+${groupPerson.group.gid}}">成员管理</a><br/>
 		</span>
 		<a th:href="@{'/document/index/'+${groupPerson.gpid}}" th:text="查看文档"></a> <br/>
 		<a th:href="@{'/group/exit/'+${groupPerson.gpid}}" >退出该组织</a><br/>

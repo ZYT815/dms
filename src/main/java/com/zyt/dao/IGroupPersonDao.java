@@ -8,4 +8,6 @@ public interface IGroupPersonDao {
 
 	void save(GroupPerson groupPerson);
 
+	GroupPerson get(String gpid);
+
 }

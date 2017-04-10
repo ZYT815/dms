@@ -17,29 +17,34 @@ public class GroupPersonService implements IGroupPersonService {
 	private IGroupService groupService;
 	@Autowired
 	private IGroupPersonDao groupPersonDao;
-	
+
+	@Override
 	public synchronized void delete(GroupPerson groupPerson) {
-		if(groupPerson.getGroup().getGroupPersons().size()==1){
+		if (groupPerson.getGroup().getGroupPersons().size() == 1) {
 			groupService.delete(groupPerson.getGroup());
-		}
-		else{
+		} else {
 			groupPersonDao.delete(groupPerson);
 		}
 	}
 
 	@Override
 	public void join(Person person, String shareId) {
-		Group group=groupService.selectByShareId(shareId);
-		
-		GroupPerson groupPerson=new GroupPerson();
+		Group group = groupService.selectByShareId(shareId);
+
+		GroupPerson groupPerson = new GroupPerson();
 		groupPerson.setPerson(person);
 		groupPerson.setGroup(group);
 		groupPerson.setPermitted(false);
-		
+
 		groupPersonDao.save(groupPerson);
 
 		group.getGroupPersons().add(groupPerson);
 		person.getGroupPersons().add(groupPerson);
+	}
+
+	@Override
+	public GroupPerson get(String gpid) {
+		return groupPersonDao.get(gpid);
 	}
 
 }

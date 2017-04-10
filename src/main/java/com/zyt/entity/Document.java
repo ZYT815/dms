@@ -32,6 +32,8 @@ public class Document implements Serializable {
 	private Group group;
 	@Column(name = "updateDate")
 	private Date updateDate;
+	@Column(name="dpass")
+	private String dpass;
 
 	public Date getUpdateDate() {
 		return updateDate;
@@ -101,5 +103,13 @@ public class Document implements Serializable {
 
 	public void setDname(String dname) {
 		this.dname = dname;
+	}
+
+	public String getDpass() {
+		return dpass;
+	}
+
+	public void setDpass(String dpass) {
+		this.dpass = dpass;
 	}
 }

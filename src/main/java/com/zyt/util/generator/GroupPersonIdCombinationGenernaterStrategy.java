@@ -8,10 +8,10 @@ import org.hibernate.id.IdentifierGenerator;
 
 import com.zyt.entity.GroupPerson;
 
-public class GroupPersonIdCombinationGenernaterStrategy implements IdentifierGenerator{
-		public Serializable generate(SharedSessionContractImplementor session, Object object)
-				throws HibernateException {
-			GroupPerson groupPerson=(GroupPerson) object;
-			return String.format("%d_%d", groupPerson.getGroup().getGid(),groupPerson.getPerson().getPid());
-		}
+public class GroupPersonIdCombinationGenernaterStrategy implements IdentifierGenerator {
+	@Override
+	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+		GroupPerson groupPerson = (GroupPerson) object;
+		return String.format("%d_%d", groupPerson.getGroup().getGid(), groupPerson.getPerson().getPid());
 	}
+}

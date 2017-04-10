@@ -28,4 +28,9 @@ public class GroupService implements IGroupService {
 		return groupDao.selectByShareId(shareId);
 	}
 
+	@Override
+	public Group get(int gid) {
+		return groupDao.get(gid);
+	}
+
 }

@@ -14,18 +14,16 @@ public class BlobBuilder extends BaseDao implements IBlobBuilder {
 
 	@Override
 	public Blob builderBlob(byte[] bytes) {
-		try(Session session=getHibernateTemplate().getSessionFactory().openSession()){
+		try (Session session = getHibernateTemplate().getSessionFactory().openSession()) {
 			return Hibernate.getLobCreator(session).createBlob(bytes);
 		}
 	}
-	
+
 	@Override
-	public Blob builderBlob(InputStream in,int length){
-		try(Session session=getHibernateTemplate().getSessionFactory().openSession()){
+	public Blob builderBlob(InputStream in, int length) {
+		try (Session session = getHibernateTemplate().getSessionFactory().openSession()) {
 			return Hibernate.getLobCreator(session).createBlob(in, length);
 		}
 	}
-	
-	
 
 }

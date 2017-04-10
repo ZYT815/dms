@@ -14,9 +14,10 @@ import com.zyt.Const;
 public class IndexController {
 	@RequestMapping("/")
 	public String index(ModelMap modelMap) {
-		if (Objects.isNull(modelMap.get(Const.Attr.LOGIN_USER)))
+		if (Objects.isNull(modelMap.get(Const.Attr.LOGIN_USER))) {
 			return "login";
-		else
+		} else {
 			return "index";
+		}
 	}
 }

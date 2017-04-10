@@ -11,6 +11,9 @@ public interface Const {
 		String DOUCMENTS = "documents";
 		String PERMITTED = "permitted";
 		String GPID = "gpid";
+		String GROUP_PERSON = "groupPersons";
+		String GROUP = "group";
+		String DOUCMENT = "document";
 	}
 
 	interface PackageName {
@@ -32,5 +35,5 @@ public interface Const {
 	}
 
 	String REDIRECT = "redirect:";
-	String FORWORD="forward:";
+	String FORWORD = "forward:";
 }

@@ -30,7 +30,7 @@ public class AppConfig {
 	@Autowired
 	private Environment environment;
 
-	//数据源
+	// 数据源
 	@Bean
 	public DataSource dataSource() throws SQLException {
 		DruidDataSource dataSource = new DruidDataSource();
@@ -42,7 +42,7 @@ public class AppConfig {
 		return dataSource;
 	}
 
-	//hibernate事务管理器
+	// hibernate事务管理器
 	@Bean
 	public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
@@ -50,7 +50,7 @@ public class AppConfig {
 		return hibernateTransactionManager;
 	}
 
-	//hiberntae sessionFactory
+	// hiberntae sessionFactory
 	@Bean
 	public SessionFactory sessionFactory(DataSource dataSource) throws IOException {
 		Properties props = new Properties();
@@ -65,7 +65,7 @@ public class AppConfig {
 		return localSessionFactoryBean.getObject();
 	}
 
-	//hibernate template
+	// hibernate template
 	@Bean
 	public HibernateTemplate hibernateTemplate(SessionFactory sessionFactory) {
 		return new HibernateTemplate(sessionFactory);

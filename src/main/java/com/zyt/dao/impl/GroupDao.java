@@ -19,9 +19,14 @@ public class GroupDao extends BaseDao implements IGroupDao {
 
 	@Override
 	public Group selectByShareId(String shareId) {
-		String sharedIdName="shareId";
-		String hql=String.format("from Group where shareId = :%s",sharedIdName);
+		String sharedIdName = "shareId";
+		String hql = String.format("from Group where shareId = :%s", sharedIdName);
 		return (Group) getHibernateTemplate().findByNamedParam(hql, sharedIdName, shareId).stream().findFirst().get();
+	}
+
+	@Override
+	public Group get(int gid) {
+		return getHibernateTemplate().get(Group.class, gid);
 	}
 
 }

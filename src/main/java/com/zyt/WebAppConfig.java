@@ -48,13 +48,13 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		templateResolver.setCacheable(false);
 		return templateResolver;
 	}
-	
+
 	@Bean
-	public CommonsMultipartResolver commonsMultipartResolver(){
+	public CommonsMultipartResolver commonsMultipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		return resolver;
 	}
-	
+
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

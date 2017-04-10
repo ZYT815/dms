@@ -18,8 +18,8 @@ public class GroupPerson implements Serializable {
 	private static final long serialVersionUID = 9187554354928135579L;
 	@Id
 	@Column(name = "gpid")
-	@GeneratedValue(generator="id_combination")
-	@GenericGenerator(name="id_combination", strategy = "com.zyt.util.generator.GroupPersonIdCombinationGenernaterStrategy")
+	@GeneratedValue(generator = "id_combination")
+	@GenericGenerator(name = "id_combination", strategy = "com.zyt.util.generator.GroupPersonIdCombinationGenernaterStrategy")
 	private String gpid;
 	@ManyToOne(targetEntity = Person.class)
 	@JoinColumn(name = "pid")
@@ -62,6 +62,7 @@ public class GroupPerson implements Serializable {
 		this.permitted = permitted;
 	}
 
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -69,20 +70,26 @@ public class GroupPerson implements Serializable {
 		return result;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		GroupPerson other = (GroupPerson) obj;
 		if (gpid == null) {
-			if (other.gpid != null)
+			if (other.gpid != null) {
 				return false;
-		} else if (!gpid.equals(other.gpid))
+			}
+		} else if (!gpid.equals(other.gpid)) {
 			return false;
+		}
 		return true;
 	}
-	
+
 }

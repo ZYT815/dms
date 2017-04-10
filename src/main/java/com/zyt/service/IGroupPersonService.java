@@ -7,4 +7,6 @@ public interface IGroupPersonService {
 	void delete(GroupPerson groupPerson);
 
 	void join(Person person, String shareId);
+
+	GroupPerson get(String gpid);
 }
