@@ -1,6 +1,8 @@
 package com.zyt.controller;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -58,15 +60,20 @@ public class DocumentController {
 		return innerDownload(document);
 	}
 
-	public ResponseEntity<byte[]> download(String did, String dpass) throws IOException, SQLException {
+	@RequestMapping(value = "/download", method = RequestMethod.POST)
+	public ResponseEntity<byte[]> download(String did, String dpass) throws IOException, SQLException, URISyntaxException {
 		Document document = documentService.selectById(did);
-		if (document.getDid().equals(dpass))
+		if (document.getDpass().equals(dpass)){
 			return innerDownload(document);
-		else 
-			return new ResponseEntity<>(HttpStatus.LOCKED);
+		}else{
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.TEXT_HTML);
+			headers.setLocation(new URI("/group/index"));
+			return new ResponseEntity<>(null,headers,HttpStatus.PERMANENT_REDIRECT);
+		}
 	}
 
-	@RequestMapping("/pass/${did}")
+	@RequestMapping("/pass/{did}")
 	public String pass(@PathVariable String did, Model model) {
 		Document document = documentService.selectById(did);
 		model.addAttribute(Const.Attr.DOUCMENT, document);
@@ -106,8 +113,8 @@ public class DocumentController {
 	}
 
 	@RequestMapping(value = "/doAdd", method = RequestMethod.POST)
-	public String doAdd(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, MultipartFile file, @RequestParam(required=false)String dpass,
-			String gpid) throws IOException {
+	public String doAdd(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, MultipartFile file,
+			@RequestParam(required = false) String dpass, String gpid) throws IOException {
 		byte[] bytes = file.getBytes();
 		Document document = new Document();
 		document.setDpass(dpass);

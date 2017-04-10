@@ -8,9 +8,9 @@
 	<a th:href="@{'/'}" th:text="首页"></a>
 	<div th:each="document:${documents}">
 		<hr/>
-		<a th:if="${document.dpass}"  th:href="@{'/document/download/'+${document.did}}" th:text="${document.dname}"></a><br/>
-		<a th:if="${!document.dpass}" th:href="@{'/document/pass'+${document.did}}" th:text="${document.dname}"></a>
-		<a th:href="@{'/document/delete/'+${document.did}}"><span th:if="${permitted}">删除</span></a>
+		<a th:if="${document.dpass == null}"  th:href="@{'/document/download/'+${document.did}}" th:text="${document.dname}"></a><br/>
+		<a th:if="${document.dpass != null}" th:href="@{'/document/pass/'+${document.did}}" th:text="${document.dname}"></a><br/>
+		<a th:if="${permitted}" th:href="@{'/document/delete/'+${document.did}}">删除</a>
 	</div>
 </body>
 </html>
