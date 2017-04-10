@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml/"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title><th:block th:text="${group.gname}"></th:block>-成员管理</title>
+</head>
+<body>
+	<div th:each="groupPerson,i:${groupPersons}">
+		<div>
+			<div th:text="${groupPerson.person.pname}"></div><br/>
+			<div th:if="${groupPerson.permitted}" th:text="他是管理员"></div><br/>
+			<a th:if="${!groupPerson.permitted}" th:href="@{'/groupPerson/fire/'+${groupPerson.gpid}}">踢出</a>
+			<hr/>
+		</div>
+	</div>
+	<a th:href="@{'/'}">首页</a>
+</body>
+</html>

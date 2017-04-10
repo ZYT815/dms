@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml/" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>文档管理系统-文档-输入密码</title>
+</head>
+<body>
+	<a th:href="@{'/'}" th:text="首页"></a>
+	<form th:action="@{/document/download/}" method="post">
+		<input type="password"  name="dpass"/>
+		<input type="hidden" th:value="${document.did}" name="did"/>
+		<button>ok</button>
+	</form>
+</body>
+</html>

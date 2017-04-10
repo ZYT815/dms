@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -105,7 +106,7 @@ public class DocumentController {
 	}
 
 	@RequestMapping(value = "/doAdd", method = RequestMethod.POST)
-	public String doAdd(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, MultipartFile file, String dpass,
+	public String doAdd(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson, MultipartFile file, @RequestParam(required=false)String dpass,
 			String gpid) throws IOException {
 		byte[] bytes = file.getBytes();
 		Document document = new Document();

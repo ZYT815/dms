@@ -29,6 +29,7 @@ CREATE TABLE document(
 	dname VARCHAR(255) NOT NULL,
 	gid INT NOT NULL,
 	updatedate DATETIME,
+	dpass VARCHAR(255),
 	CONSTRAINT fk_group_document FOREIGN KEY(gid) REFERENCES `group`(gid)
 );
 
