@@ -16,13 +16,8 @@ public class RegisterController {
 	@Autowired
 	private IRegisterService registerService;
 
-	@RequestMapping("/register")
-	public String register() {
-		return "/register";
-	}
-
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
-	public String doRegister(String username, String password, RedirectAttributes redirectAttributes) {
+	public String doRegister(String username, String password,String password2, RedirectAttributes redirectAttributes) {
 		Person person = new Person();
 		person.setPname(username);
 		person.setPpass(password);

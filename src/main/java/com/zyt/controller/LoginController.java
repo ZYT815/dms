@@ -23,7 +23,7 @@ public class LoginController {
 	public String doLogin(String username, String password, Model model) {
 		Person login = loginSerivce.login(username, password);
 		model.addAttribute(Const.Attr.LOGIN_USER, login);
-		return "index";
+		return Const.FORWORD+"/";
 	}
 	
 	@RequestMapping("/logout")

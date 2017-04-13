@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml/"
 	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>文档管理系统</title>
+<head th:include="/_layout/_header">
 </head>
 <body>
-	当前用户 <span th:text="${session.login_user.pname}"></span><br/>
-	<a th:href="@{/group/create}">创建组织</a><br/>
-	<a th:href="@{/group/index}">我的组织</a><br/>
-	<a th:href="@{/group/join}">加入组织</a><br/>
-	<a th:href="@{/login/logout}">退出</a>
+<div class="gtco-loader"></div>
+<div id="page">
+	<div class="page-inner">
+	<nav th:include="/_layout/_header_nav"></nav>
+	<div class="gtco-section border-bottom" style="background : #159FFF">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2 th:text="${session.login_user.pname}" style="color:white"></h2>
+					<p><a th:href="@{/login/logout}" >退出</a></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-6">
+						<figure>
+							<div class="overlay"><i class="ti-plus"></i></div>
+							<a th:href="@{/group/create}"><img th:src="@{/images/img_2.jpg}" alt="Image" class="img-responsive"></a>
+						</figure>
+						<div class="fh5co-text">
+							<h2><a th:href="@{/group/create}">创建组织</a></h2>
+							<p>创建一个组织，创建以后当前用户即为管理员</p>
+						</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6">
+						<figure>
+							<div class="overlay"><i class="ti-plus"></i></div>
+							<a th:href="@{/group/index}"><img th:src="@{/images/img_3.jpg}" alt="Image" class="img-responsive"></a>
+						</figure>
+						<div class="fh5co-text">
+							<h2><a th:href="@{/group/index}">我的组织</a></h2>
+							<p>查看当前用户的组织和文档信息</p>
+						</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6">
+						<figure>
+							<div class="overlay"><i class="ti-plus"></i></div>
+							<a th:href="@{/group/join}"><img th:src="@{/images/img_4.jpg}" alt="Image" class="img-responsive"></a>
+						</figure>
+						<div class="fh5co-text">
+							<h2><a th:href="@{/group/join}">加入组织</a></h2>
+							<p>输入某个组织的邀请码即可加入该组织</p>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
 </body>
 </html>
