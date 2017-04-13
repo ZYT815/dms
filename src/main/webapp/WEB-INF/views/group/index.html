@@ -27,7 +27,7 @@
 							<a style="color:#ffffff" th:href="@{'/document/index/'+${groupPerson.gpid}}" th:text="查看文档"></a>
 							<a style="color:#ffffff" th:href="@{'/group/exit/'+${groupPerson.gpid}}" th:text="退出该组织"></a>
 						</p>
-						<a th:text="查看邀请码" style="color:#eeeeee" th:href="'javascript:alert(\''+${groupPerson.group.shareId}+'\')'"></a>
+						<a th:if="${groupPerson.permitted}" th:text="查看邀请码" style="color:#eeeeee" th:href="'javascript:alert(\''+${groupPerson.group.shareId}+'\')'"></a>
 					</div>
 				</div>
 			</div>
