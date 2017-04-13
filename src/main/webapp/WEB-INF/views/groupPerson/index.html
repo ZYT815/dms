@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml/"
 	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title><th:block th:text="${group.gname}"></th:block>-成员管理</title>
-</head>
+<head th:replace="/_layout/_header :: _header"></head>
 <body>
-	<div th:each="groupPerson,i:${groupPersons}">
-		<div>
-			<div th:text="${groupPerson.person.pname}"></div><br/>
-			<div th:if="${groupPerson.permitted}" th:text="他是管理员"></div><br/>
-			<a th:if="${!groupPerson.permitted}" th:href="@{'/groupPerson/fire/'+${groupPerson.gpid}}">踢出</a>
-			<hr/>
+	<nav th:replace="/_layout/_header_nav :: _header_nav"></nav>
+	<div id="gtco-features" class="border-bottom" style="background:#35AFEE">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+					<h2 style="color:#ffffff" th:text="'组织成员管理:'+${group.gname}"></h2>
+					<p style="color:#eeeeee">踢出该组织的成员</p>
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-3 col-sm-6" th:each="groupPerson,i:${session.login_user.groupPersons}" >
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon" > 
+							<i class="ti-vector" ></i>
+						</span>
+						<h3 style="color:#ffffff !important" th:text="${groupPerson.person.pname}"></h3>
+						<p th:if="${groupPerson.permitted}">
+							<span style="color:#ffffff" th:text="管理员"></span> 
+						</p>
+						<p th:if="${!groupPerson.permitted}">
+							<a style="color:#ffffff" th:href="@{'/groupPerson/fire/'+${groupPerson.gpid}}" th:text="踢出"></a>
+						</p>
+						<p>
+						</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<a th:href="@{'/'}">首页</a>
 </body>
 </html>

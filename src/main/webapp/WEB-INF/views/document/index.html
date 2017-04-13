@@ -1,16 +1,34 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml/" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>文档管理系统-组织文档</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml/"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/_layout/_header :: _header"></head>
 <body>
-	<a th:href="@{'/'}" th:text="首页"></a>
-	<div th:each="document:${documents}">
-		<hr/>
-		<a th:if="${document.dpass == null}"  th:href="@{'/document/download/'+${document.did}}" th:text="${document.dname}"></a><br/>
-		<a th:if="${document.dpass != null}" th:href="@{'/document/pass/'+${document.did}}" th:text="${document.dname}"></a><br/>
-		<a th:if="${permitted}" th:href="@{'/document/delete/'+${document.did}}">删除</a>
+	<nav th:replace="/_layout/_header_nav :: _header_nav"></nav>
+	<div id="gtco-features" class="border-bottom" style="background:#35AFEE">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+					<h2 style="color:#ffffff">文档管理</h2>
+					<p style="color:#eeeeee">下载组织文档,部分文档需要密码</p>
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-3 col-sm-6" th:each="document:${documents}" >
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon" > 
+							<i class="ti-vector" ></i>
+						</span>
+						<h3 style="color:#ffffff" th:text="${document.dname}">
+						</h3>
+						<p>
+						<a style="color:#ffffff" th:if="${document.dpass == null}"  th:href="@{'/document/download/'+${document.did}}" th:text="'下载'"></a>
+						<a style="color:#ffffff" th:if="${document.dpass != null}" th:href="@{'/document/pass/'+${document.did}}" th:text="'下载(加密)'"></a>
+						</p>
+						<p><a style="color:#ffffff" th:if="${permitted}" th:href="@{'/document/delete/'+${document.did}}">删除</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

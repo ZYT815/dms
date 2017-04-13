@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml/" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>文档管理系统-文档-输入密码</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml/"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/_layout/_header :: _header"></head>
 <body>
-	<a th:href="@{'/'}" th:text="首页"></a>
-	<form th:action="@{/document/download/}" method="post">
-		<input type="password"  name="dpass"/>
-		<input type="hidden" th:value="${document.did}" name="did"/>
-		<button>ok</button>
-	</form>
+	<nav th:replace="/_layout/_header_nav :: _header_nav"></nav>
+	<div id="gtco-subscribe">
+		<div class="gtco-container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2>下载加密文档</h2>
+					<p>输入密码后下载</p>
+				</div>
+			</div>
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2">
+					<form class="form-inline" th:action="@{/document/download/}" th:method="post">
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								 <input type="password" class="form-control" placeholder="在这里输入密码" name="dpass"/>
+								 <input type="hidden" th:value="${document.did}" name="did"/>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6">
+							<button type="submit" class="btn btn-default btn-block">下载</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
