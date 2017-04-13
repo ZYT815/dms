@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml/"
 	xmlns:th="http://www.thymeleaf.org">
-<head th:include="/_layout/_header">
-</head>
+<head th:replace="/_layout/_header :: _header"></head>
 <div class="gtco-loader"></div>
 <div id="page">
 	<div class="page-inner">
-	<nav th:include="/_layout/_header_nav"></nav>
+	<nav th:replace="/_layout/_header_nav :: _header_nav"></nav>
 		<header id="gtco-header" class="gtco-cover" role="banner"  th:style="'background-image: url('+@{/images/img_4.jpg}+')'">
 			<div class="overlay"></div>
 			<div class="gtco-container">
