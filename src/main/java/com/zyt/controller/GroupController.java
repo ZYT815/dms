@@ -64,7 +64,7 @@ public class GroupController {
 
 	@RequestMapping("/index")
 	public String index(@ModelAttribute(Const.Attr.LOGIN_USER) Person loginPerson) {
-		return "group/index";
+		return "group/index"; 
 	}
 
 	@RequestMapping("/exit/{gpid}")
