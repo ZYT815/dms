@@ -27,19 +27,18 @@
 							<a style="color:#ffffff" th:href="@{'/document/index/'+${groupPerson.gpid}}" th:text="查看文档"></a>
 							<a style="color:#ffffff" th:href="@{'/group/exit/'+${groupPerson.gpid}}" th:text="退出该组织"></a>
 						</p>
-						<a th:if="${groupPerson.permitted}" style="color:#eeeeee" th:href="'#" onclick="copy()">查看邀请码</a>
+						<a th:if="${groupPerson.permitted}" style="color:#eeeeee" th:id="${groupPerson.group.shareId}" th:href="'javascript:copy(\''+${groupPerson.group.shareId}+'\')'">
+							邀请码
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function copy() {
-			var obj = event.srcElement ? event.srcElement : event.target; 
-			obj.select();
-			document.execCommand("Copy"); // 执行浏览器复制命令
-			alert("邀请码已复制到剪贴板，可发送给好友");
-		}
-	</script>
 </body>
+<script type="text/javascript">
+	function copy(content){
+		window.prompt("按ctrl+c复制邀请码给朋友", content);
+	}
+</script>
 </html>
